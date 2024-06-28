@@ -14,6 +14,8 @@ class MemoryRepository {
 
   String get storageUrl => _client.storageUrl;
 
+  RealtimeChannel get memoryChannel => _client.channel('public:memories');
+  
   Future<List<Memory>> getMemories() => _client.from('memories')
     .select<List<Map<String, dynamic>>>('id, title, created_at, image_id, profiles (id, username)')
     .order('created_at')
@@ -30,13 +32,13 @@ class MemoryRepository {
       throw 'Missing profile id';
     }
 
+    await _client.storage.from('memories').upload('$profileId/$imageId', file);
+
     await _client.from('memories').insert({
       'title': title,
       'image_id': imageId,
       'profile_id': profileId,
     });
-
-    await _client.storage.from('memories').upload('$profileId/$imageId', file);
   }
 
   Future<void> updateMemory({

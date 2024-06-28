@@ -6,7 +6,7 @@ part of 'memory_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$memoryNotifierHash() => r'7a7ed3f73b94e6b75973726195bfb2bc97159729';
+String _$memoryNotifierHash() => r'5e3967d7ad151a680714e5e27ce137f697cb302b';
 
 /// See also [MemoryNotifier].
 @ProviderFor(MemoryNotifier)
