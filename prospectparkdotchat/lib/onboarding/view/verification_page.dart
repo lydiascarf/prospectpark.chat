@@ -2,8 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+class VerificationPageParams {
+  const VerificationPageParams({
+    required this.email,
+    required this.password,
+    required this.username,
+  });
+
+  final String email;
+  final String password;
+  final String username;
+}
+
 class VerificationPage extends ConsumerStatefulWidget {
-  const VerificationPage({super.key});
+  const VerificationPage({required this.params, super.key});
+
+  final VerificationPageParams params;
 
   @override
   ConsumerState<VerificationPage> createState() => _VerificationPageState();
