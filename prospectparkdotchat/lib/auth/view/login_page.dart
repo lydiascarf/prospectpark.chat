@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memories_app/auth/auth.dart';
 import 'package:memories_app/core/core.dart';
 import 'package:memories_app/onboarding/onboarding.dart';
 
@@ -20,7 +21,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _passwordCtrl = TextEditingController();
   final _usernameCtrl = TextEditingController();
 
-  Future<void> _login() async {}
+  Future<void> _login() async {
+
+    try {
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      await ref.read(authRepositoryProvider).logIn(email: _emailCtrl.text, password: _passwordCtrl.text);
+      if (mounted) {
+        context.pop();
+      }
+    } catch(e){
+      setState(() {
+        _isSubmitting = false;
+      });
+
+      context.showAlert(e.toString());
+    }
+  }
 
   Future<void> _createAccount() async {
     try {
@@ -98,7 +117,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: _isSubmitting ? null : () {},
+                  onPressed: _isSubmitting ? null : () {
+                    if (_formKey.currentState!.validate()) {
+                      _login();
+                    } else {
+                      setState(() {
+                        _autovalidateMode = AutovalidateMode.always;
+                      });
+                    }
+                  },
                   child: const Text('Submit'),
                 ),
               ),
