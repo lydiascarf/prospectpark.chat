@@ -8,4 +8,12 @@ extension BuildContextExt on BuildContext {
         content: Text(message),
         duration: const Duration(milliseconds: 2000),
       ));
+
+  Future<T?> showBottomSheet<T>({
+    required Widget child,
+  }) =>
+      showModalBottomSheet<T>(
+        context: this,
+        builder: (_) => child,
+      );
 }
