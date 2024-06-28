@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://nfhvnpxoecniyvpwgfdq.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5maHZucHhvZWNuaXl2cHdnZmRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTk1OTQ2NzIsImV4cCI6MjAzNTE3MDY3Mn0.lKTmTHFZWs2-X2mdT0TL2kofZZIKuuPgopbB_zo6erI',
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
