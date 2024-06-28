@@ -1,5 +1,0 @@
-package com.example.prospectparkdotchat
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity()
