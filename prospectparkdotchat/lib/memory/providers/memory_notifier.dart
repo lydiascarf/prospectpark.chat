@@ -13,15 +13,24 @@ class MemoryNotifier extends _$MemoryNotifier {
   }
 
   void _initMemoryChannel() {
-    ref.read(memoryRepositoryProvider).memoryChannel.onPostgresChanges(
-      event: PostgresChangeEvent.all,
-      schema: 'public',
-      table: 'memories',
-      callback: (PostgresChangePayload payload) async {
-        state = await AsyncValue.guard(
-          () async => ref.read(memoryRepositoryProvider).getMemories(),
-        );
-      }
-    ).subscribe();
+    ref
+        .read(memoryRepositoryProvider)
+        .memoryChannel
+        .onPostgresChanges(
+            event: PostgresChangeEvent.all,
+            schema: 'public',
+            table: 'memories',
+            callback: (PostgresChangePayload payload) async {
+              if ([
+                PostgresChangeEvent.insert,
+                PostgresChangeEvent.update,
+                PostgresChangeEvent.delete
+              ].contains(payload.eventType)) {
+                state = await AsyncValue.guard(
+                  () async => ref.read(memoryRepositoryProvider).getMemories(),
+                );
+              }
+            })
+        .subscribe();
   }
 }

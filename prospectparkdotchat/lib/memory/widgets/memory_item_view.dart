@@ -12,15 +12,14 @@ class MemoryItemView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authUserProvider).asData?.value;
-    final storageUrl = ref.read(memoryRepositoryProvider).storageUrl;
     return Card(
         clipBehavior: Clip.antiAlias,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Stack(
           children: [
-            Image.network(
-                '$storageUrl/object/public/memories/${data.profileId}/${data.imageId}'),
+            Image.network(ref.read(imageUrlProvider(
+                userId: data.profileId, filename: data.imageId))),
             if (user != null && user.id == data.profileId)
               Positioned.fill(
                 child: Center(
