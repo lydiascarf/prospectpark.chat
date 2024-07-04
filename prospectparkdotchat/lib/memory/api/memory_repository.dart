@@ -55,5 +55,15 @@ class MemoryRepository {
         .eq('profile_id', profileId!);
   }
 
-  Future<void> deleteMemory(Memory data) async {}
+  Future<void> deleteMemory(Memory data) async {
+    final profileId = _client.auth.currentSession?.user.id;
+    final imageId = data.imageId;
+
+    await _client
+    .from('memories')
+    .delete()
+    .eq('id', data.id)
+    .eq('profile_id', profileId!);
+    await _client.storage.from('memories').remove(['$profileId/$imageId']);
+  }
 }

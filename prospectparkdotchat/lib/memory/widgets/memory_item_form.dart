@@ -68,7 +68,27 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
       await ref
           .read(memoryRepositoryProvider)
           .updateMemory(id: widget.data!.id, title: _titleCtrl.text);
-          
+
+      _popView();
+    } catch (e) {
+      _popView();
+      if (mounted) {
+        context.showAlert(e.toString());
+      }
+    }
+  }
+
+  Future<void> _deleteMemory() async {
+    if (widget.data == null) {
+      return;
+    }
+
+    try {
+      setState(() {
+        _isSubmitting = true;
+      });
+      await ref.read(memoryRepositoryProvider).deleteMemory(widget.data!);
+
       _popView();
     } catch (e) {
       _popView();
@@ -87,7 +107,8 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         const SizedBox(
           height: 10,
         ),
-        Text(widget.data == null ? 'New Memory' : 'Edit Memory', style: const TextStyle(fontSize: 30)),
+        Text(widget.data == null ? 'New Memory' : 'Edit Memory',
+            style: const TextStyle(fontSize: 30)),
         const SizedBox(
           height: 30,
         ),
@@ -110,13 +131,10 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         ),
         if (widget.data?.imageId != null)
           SizedBox(
-            height: 150,
-            child: Image.network(
-             ref.read( imageUrlProvider(userId: widget.data!.profileId,
-             filename: widget.data!.imageId
-             ))
-            )
-          )
+              height: 150,
+              child: Image.network(ref.read(imageUrlProvider(
+                  userId: widget.data!.profileId,
+                  filename: widget.data!.imageId))))
         else
           FileUploadField(
             readOnly: _isSubmitting,
@@ -138,7 +156,7 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         SizedBox(
           width: double.infinity,
           child: FilledButton(
-              onPressed: () async {
+              onPressed:  _isSubmitting ? null : () async {
                 if (_formKey.currentState!.validate() == false) {
                   setState(() {
                     _autovalidateMode = AutovalidateMode.always;
@@ -156,7 +174,9 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         ),
         SizedBox(
           width: double.infinity,
-          child: OutlinedButton(onPressed: () {}, child: const Text('Delete')),
+          child: OutlinedButton(
+              onPressed: _isSubmitting ? null : _deleteMemory,
+              child: const Text('Delete')),
         )
       ]),
     );
