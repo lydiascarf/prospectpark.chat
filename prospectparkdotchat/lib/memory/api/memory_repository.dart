@@ -15,11 +15,12 @@ class MemoryRepository {
   String get storageUrl => _client.storage.url;
 
   RealtimeChannel get memoryChannel => _client.channel('public:memories');
-  
-  Future<List<Memory>> getMemories() => _client.from('memories')
-    .select('id, title, created_at, image_id, profiles (id, username)')
-    .order('created_at')
-    .then((data) => data.map((json) => Memory.fromJson(json)).toList());
+
+  Future<List<Memory>> getMemories() => _client
+      .from('memories')
+      .select('id, title, created_at, image_id, profiles (id, username)')
+      .order('created_at')
+      .then((data) => data.map((json) => Memory.fromJson(json)).toList());
 
   Future<void> addMemory({
     required String title,
@@ -45,10 +46,14 @@ class MemoryRepository {
     required int id,
     required String title,
   }) async {
+    final profileId = _client.auth.currentSession?.user.id;
 
+    await _client
+        .from('memories')
+        .update({'title': title})
+        .eq('id', id)
+        .eq('profile_id', profileId!);
   }
 
-  Future<void> deleteMemory(Memory data) async {
-
-  }
+  Future<void> deleteMemory(Memory data) async {}
 }

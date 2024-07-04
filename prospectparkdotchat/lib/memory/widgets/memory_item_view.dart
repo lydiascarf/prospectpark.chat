@@ -11,38 +11,63 @@ class MemoryItemView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(authUserProvider).asData?.value;
     final storageUrl = ref.read(memoryRepositoryProvider).storageUrl;
     return Card(
-      clipBehavior: Clip.antiAlias,
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: Stack(
-        children: [
-          Image.network('$storageUrl/object/public/memories/${data.profileId}/${data.imageId}'),
-          Positioned(top: 10, left: 10, child: Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: Colors.black87,
-            ),
-              child: Text(
-                data.title,
-                style: const TextStyle(
-                  color: Colors.white
+        clipBehavior: Clip.antiAlias,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: Stack(
+          children: [
+            Image.network(
+                '$storageUrl/object/public/memories/${data.profileId}/${data.imageId}'),
+            if (user != null && user.id == data.profileId)
+              Positioned.fill(
+                child: Center(
+                  child: FilledButton(
+                      onPressed: () {
+                        context.showBottomSheet(
+                          child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: MemoryItemForm(
+                                data: data,
+                              )),
+                        );
+                      },
+                      child: const Icon(Icons.edit, color: Colors.white)),
                 ),
-              )
-          )
-          ),
-          Positioned(bottom: 10, right: 10, child: Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(color: Colors.black54,borderRadius: BorderRadius.circular(6)),
-            child: Text('by ${data.username}',style: const TextStyle(
-              color: Colors.white,
-              fontStyle: FontStyle.italic,
-            ),),
-          ),)
-        ],
-      )
-    );
+              ),
+            Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.black87,
+                    ),
+                    child: Text(
+                      data.title,
+                      style: const TextStyle(color: Colors.white),
+                    ))),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(6)),
+                child: Text(
+                  'by ${data.username}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

@@ -20,8 +20,14 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
   AutovalidateMode? _autovalidateMode;
   bool _isSubmitting = false;
 
-  final _titleCtrl = TextEditingController();
+  late TextEditingController _titleCtrl;
   File? _file;
+
+  @override
+  void initState() {
+    _titleCtrl = TextEditingController(text: widget.data?.title);
+    super.initState();
+  }
 
   void _popView() {
     if (mounted) {
@@ -50,6 +56,28 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
     }
   }
 
+  Future<void> _updateMemory() async {
+    if (widget.data == null) {
+      return;
+    }
+
+    try {
+      setState(() {
+        _isSubmitting = true;
+      });
+      await ref
+          .read(memoryRepositoryProvider)
+          .updateMemory(id: widget.data!.id, title: _titleCtrl.text);
+          
+      _popView();
+    } catch (e) {
+      _popView();
+      if (mounted) {
+        context.showAlert(e.toString());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -59,7 +87,7 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         const SizedBox(
           height: 10,
         ),
-        Text('New Memory', style: const TextStyle(fontSize: 30)),
+        Text(widget.data == null ? 'New Memory' : 'Edit Memory', style: const TextStyle(fontSize: 30)),
         const SizedBox(
           height: 30,
         ),
@@ -80,20 +108,30 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
         const SizedBox(
           height: 20,
         ),
-        FileUploadField(
-          readOnly: _isSubmitting,
-          onChanged: (file) {
-            setState(() {
-              _file = file;
-            });
-          },
-          validator: (value) {
-            if (value == null) {
-              return 'Please select an image';
-            }
-            return null;
-          },
-        ),
+        if (widget.data?.imageId != null)
+          SizedBox(
+            height: 150,
+            child: Image.network(
+             ref.read( imageUrlProvider(userId: widget.data!.profileId,
+             filename: widget.data!.imageId
+             ))
+            )
+          )
+        else
+          FileUploadField(
+            readOnly: _isSubmitting,
+            onChanged: (file) {
+              setState(() {
+                _file = file;
+              });
+            },
+            validator: (value) {
+              if (value == null) {
+                return 'Please select an image';
+              }
+              return null;
+            },
+          ),
         const SizedBox(
           height: 20,
         ),
@@ -105,6 +143,8 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
                   setState(() {
                     _autovalidateMode = AutovalidateMode.always;
                   });
+                } else if (widget.data != null) {
+                  _updateMemory();
                 } else {
                   _addMemory();
                 }
