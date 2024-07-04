@@ -1,6 +1,6 @@
 {
-    "name": "memories_app",
-    "short_name": "memories_app",
+    "name": "prospect_park_dot_chat",
+    "short_name": "prospect_park_dot_chat",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

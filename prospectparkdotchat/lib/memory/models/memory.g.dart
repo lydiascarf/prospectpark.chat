@@ -6,8 +6,8 @@ part of 'memory.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Memory _$$_MemoryFromJson(Map<String, dynamic> json) => _$_Memory(
-      id: json['id'] as int,
+_$MemoryImpl _$$MemoryImplFromJson(Map<String, dynamic> json) => _$MemoryImpl(
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       imageId: json['image_id'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
@@ -15,7 +15,8 @@ _$_Memory _$$_MemoryFromJson(Map<String, dynamic> json) => _$_Memory(
       username: _readUsername(json, 'username') as String,
     );
 
-Map<String, dynamic> _$$_MemoryToJson(_$_Memory instance) => <String, dynamic>{
+Map<String, dynamic> _$$MemoryImplToJson(_$MemoryImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'image_id': instance.imageId,

@@ -1,4 +1,4 @@
-import 'package:memories_app/auth/auth.dart';
+import 'package:prospect_park_dot_chat/auth/auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

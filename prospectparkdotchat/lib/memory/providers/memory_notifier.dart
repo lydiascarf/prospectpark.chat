@@ -1,4 +1,4 @@
-import 'package:memories_app/memory/memory.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -13,15 +13,11 @@ class MemoryNotifier extends _$MemoryNotifier {
   }
 
   void _initMemoryChannel() {
-    ref.read(memoryRepositoryProvider).memoryChannel.on(
-      RealtimeListenTypes.postgresChanges,
-      ChannelFilter(
-        event: '*',
-        schema: 'public',
-        table: 'memories'
-      ),
-      (payload, [_]) async {
-        print(payload);
+    ref.read(memoryRepositoryProvider).memoryChannel.onPostgresChanges(
+      event: PostgresChangeEvent.all,
+      schema: 'public',
+      table: 'memories',
+      callback: (PostgresChangePayload payload) async {
         state = await AsyncValue.guard(
           () async => ref.read(memoryRepositoryProvider).getMemories(),
         );

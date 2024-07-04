@@ -6,7 +6,7 @@ part of 'memory_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$memoryNotifierHash() => r'5e3967d7ad151a680714e5e27ce137f697cb302b';
+String _$memoryNotifierHash() => r'88cc53018738cd004eb2ccc8265cd41686c0bed4';
 
 /// See also [MemoryNotifier].
 @ProviderFor(MemoryNotifier)
@@ -23,4 +23,4 @@ final memoryNotifierProvider =
 
 typedef _$MemoryNotifier = AutoDisposeAsyncNotifier<List<Memory>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

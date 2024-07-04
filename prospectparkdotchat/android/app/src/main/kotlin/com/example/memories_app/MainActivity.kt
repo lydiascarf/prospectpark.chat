@@ -1,4 +1,4 @@
-package com.example.memories_app
+package com.example.prospect_park_dot_chat
 
 import io.flutter.embedding.android.FlutterActivity
 

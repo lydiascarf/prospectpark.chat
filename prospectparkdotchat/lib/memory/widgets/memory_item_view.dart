@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memories_app/memory/memory.dart';
+import 'package:prospect_park_dot_chat/auth/auth.dart';
+import 'package:prospect_park_dot_chat/core/core.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 
 class MemoryItemView extends ConsumerWidget {
   const MemoryItemView({required this.data, super.key});
-  
+
   final Memory data;
 
   @override

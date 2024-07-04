@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:memories_app/auth/auth.dart';
-import 'package:memories_app/core/core.dart';
-import 'package:memories_app/onboarding/onboarding.dart';
+import 'package:prospect_park_dot_chat/auth/auth.dart';
+import 'package:prospect_park_dot_chat/core/core.dart';
+import 'package:prospect_park_dot_chat/onboarding/onboarding.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -36,8 +36,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       setState(() {
         _isSubmitting = false;
       });
-
-      context.showAlert(e.toString());
+      if (mounted) {
+        context.showAlert(e.toString());
+      }
     }
   }
 
@@ -58,7 +59,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 username: _usernameCtrl.text));
       }
     } catch (e) {
-      context.showAlert(e.toString());
+      if (mounted) {
+        context.showAlert(e.toString());
+      }
     }
 
     setState(() {

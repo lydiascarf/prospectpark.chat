@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:memories_app/core/core.dart';
-import 'package:memories_app/memory/memory.dart';
+import 'package:prospect_park_dot_chat/core/core.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 
 class MemoryItemForm extends ConsumerStatefulWidget {
   const MemoryItemForm({this.data, super.key});
@@ -44,7 +44,9 @@ class _MemoryItemFormState extends ConsumerState<MemoryItemForm> {
       _popView();
     } catch (e) {
       _popView();
-      context.showAlert(e.toString());
+      if (mounted) {
+        context.showAlert(e.toString());
+      }
     }
   }
 

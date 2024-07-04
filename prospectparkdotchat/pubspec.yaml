@@ -1,22 +1,22 @@
-name: memories_app
+name: prospect_park_dot_chat
 description: A realtime photo sharing app built on Supabase.
 publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: '>=3.2.2 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  supabase_flutter: ^1.5.0
-  go_router: ^6.5.0
-  flutter_riverpod: ^2.3.2
-  riverpod_annotation: ^2.0.2
+  supabase_flutter: ^2.0.1
+  go_router: ^14.0.0
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
   file_picker: ^5.2.6
   flutter_staggered_grid_view: ^0.6.2
   freezed_annotation: ^2.2.0
-  json_annotation: ^4.8.0
+  json_annotation: ^4.9.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -27,11 +27,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
   freezed: ^2.3.2
-  riverpod_generator: ^2.1.4
-  build_runner: ^2.3.3
-  json_serializable: ^6.6.1
+  riverpod_generator: ^2.4.0
+  riverpod_lint: ^2.3.10
+  build_runner: ^2.4.9
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true

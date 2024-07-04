@@ -12,7 +12,7 @@ part of 'memory.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Memory _$MemoryFromJson(Map<String, dynamic> json) {
   return _Memory.fromJson(json);
@@ -100,9 +100,10 @@ class _$MemoryCopyWithImpl<$Res, $Val extends Memory>
 }
 
 /// @nodoc
-abstract class _$$_MemoryCopyWith<$Res> implements $MemoryCopyWith<$Res> {
-  factory _$$_MemoryCopyWith(_$_Memory value, $Res Function(_$_Memory) then) =
-      __$$_MemoryCopyWithImpl<$Res>;
+abstract class _$$MemoryImplCopyWith<$Res> implements $MemoryCopyWith<$Res> {
+  factory _$$MemoryImplCopyWith(
+          _$MemoryImpl value, $Res Function(_$MemoryImpl) then) =
+      __$$MemoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,10 +116,11 @@ abstract class _$$_MemoryCopyWith<$Res> implements $MemoryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MemoryCopyWithImpl<$Res>
-    extends _$MemoryCopyWithImpl<$Res, _$_Memory>
-    implements _$$_MemoryCopyWith<$Res> {
-  __$$_MemoryCopyWithImpl(_$_Memory _value, $Res Function(_$_Memory) _then)
+class __$$MemoryImplCopyWithImpl<$Res>
+    extends _$MemoryCopyWithImpl<$Res, _$MemoryImpl>
+    implements _$$MemoryImplCopyWith<$Res> {
+  __$$MemoryImplCopyWithImpl(
+      _$MemoryImpl _value, $Res Function(_$MemoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +133,7 @@ class __$$_MemoryCopyWithImpl<$Res>
     Object? profileId = null,
     Object? username = null,
   }) {
-    return _then(_$_Memory(
+    return _then(_$MemoryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -162,8 +164,8 @@ class __$$_MemoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Memory implements _Memory {
-  const _$_Memory(
+class _$MemoryImpl implements _Memory {
+  const _$MemoryImpl(
       {required this.id,
       required this.title,
       @JsonKey(name: 'image_id') required this.imageId,
@@ -171,8 +173,8 @@ class _$_Memory implements _Memory {
       @JsonKey(readValue: _readProfileId) required this.profileId,
       @JsonKey(readValue: _readUsername) required this.username});
 
-  factory _$_Memory.fromJson(Map<String, dynamic> json) =>
-      _$$_MemoryFromJson(json);
+  factory _$MemoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MemoryImplFromJson(json);
 
   @override
   final int id;
@@ -197,10 +199,10 @@ class _$_Memory implements _Memory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Memory &&
+            other is _$MemoryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.imageId, imageId) || other.imageId == imageId) &&
@@ -220,12 +222,12 @@ class _$_Memory implements _Memory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MemoryCopyWith<_$_Memory> get copyWith =>
-      __$$_MemoryCopyWithImpl<_$_Memory>(this, _$identity);
+  _$$MemoryImplCopyWith<_$MemoryImpl> get copyWith =>
+      __$$MemoryImplCopyWithImpl<_$MemoryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MemoryToJson(
+    return _$$MemoryImplToJson(
       this,
     );
   }
@@ -239,9 +241,9 @@ abstract class _Memory implements Memory {
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(readValue: _readProfileId) required final String profileId,
           @JsonKey(readValue: _readUsername) required final String username}) =
-      _$_Memory;
+      _$MemoryImpl;
 
-  factory _Memory.fromJson(Map<String, dynamic> json) = _$_Memory.fromJson;
+  factory _Memory.fromJson(Map<String, dynamic> json) = _$MemoryImpl.fromJson;
 
   @override
   int get id;
@@ -261,6 +263,6 @@ abstract class _Memory implements Memory {
   String get username;
   @override
   @JsonKey(ignore: true)
-  _$$_MemoryCopyWith<_$_Memory> get copyWith =>
+  _$$MemoryImplCopyWith<_$MemoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

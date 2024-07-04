@@ -32,7 +32,7 @@ class _VerificationPageState extends ConsumerState<VerificationPage> {
 
   Future<void> _resendCode() async {}
 
-  Future<void> _verify() async {}
+  // Future<void> _verify() async {}
 
   @override
   Widget build(BuildContext context) {

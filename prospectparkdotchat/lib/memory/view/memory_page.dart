@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:memories_app/auth/auth.dart';
-import 'package:memories_app/auth/providers/auth_user.dart';
-import 'package:memories_app/core/core.dart';
-import 'package:memories_app/memory/memory.dart';
-import 'package:memories_app/memory/widgets/memory_item_form.dart';
+import 'package:prospect_park_dot_chat/auth/auth.dart';
+import 'package:prospect_park_dot_chat/core/core.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 
 class MemoryPage extends ConsumerWidget {
   const MemoryPage({super.key});
@@ -15,7 +13,7 @@ class MemoryPage extends ConsumerWidget {
     final user = ref.watch(authUserProvider).asData?.value;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Memories App'),
+        title: const Text('prospectpark.chat'),
         actions: [
           if (user != null)
             IconButton(

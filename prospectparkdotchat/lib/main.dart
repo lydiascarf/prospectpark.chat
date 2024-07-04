@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:memories_app/core/core.dart';
+import 'package:prospect_park_dot_chat/core/core.dart';
 
 Future<void> main() async {
   await Supabase.initialize(
@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final routes = ref.read(routeProvider);
     return MaterialApp.router(
-      title: 'Memories App',
+      title: 'prospectpark.chat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,

@@ -1,4 +1,4 @@
-# memories_app
+# prospectpark.chat
 
 A realtime photo sharing app built on Supabase and Riverpod.
 

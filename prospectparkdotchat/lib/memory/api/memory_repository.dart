@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:memories_app/memory/memory.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,12 +12,12 @@ MemoryRepository memoryRepository(MemoryRepositoryRef _) => MemoryRepository();
 class MemoryRepository {
   final _client = Supabase.instance.client;
 
-  String get storageUrl => _client.storageUrl;
+  String get storageUrl => _client.storage.url;
 
   RealtimeChannel get memoryChannel => _client.channel('public:memories');
   
   Future<List<Memory>> getMemories() => _client.from('memories')
-    .select<List<Map<String, dynamic>>>('id, title, created_at, image_id, profiles (id, username)')
+    .select('id, title, created_at, image_id, profiles (id, username)')
     .order('created_at')
     .then((data) => data.map((json) => Memory.fromJson(json)).toList());
 

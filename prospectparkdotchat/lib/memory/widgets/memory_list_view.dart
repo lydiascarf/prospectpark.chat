@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:memories_app/memory/memory.dart';
+import 'package:prospect_park_dot_chat/memory/memory.dart';
 
 class MemoryListView extends ConsumerWidget {
   const MemoryListView({super.key});

@@ -40,11 +40,11 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "memories_app");
+    gtk_header_bar_set_title(header_bar, "prospect_park_dot_chat");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "memories_app");
+    gtk_window_set_title(window, "prospect_park_dot_chat");
   }
 
   gtk_window_set_default_size(window, 1280, 720);

@@ -6,22 +6,19 @@ import 'package:flutter/material.dart';
 class FileUploadField extends FormField<File?> {
   FileUploadField({
     FormFieldSetter<File>? onChanged,
-    FormFieldValidator<File>? validator,
-    File? initialValue,
+    super.validator,
+    super.initialValue,
     bool readOnly = false,
-    Key? key,
+    super.key,
   }) : super(
-          key: key,
           onSaved: onChanged,
-          validator: validator,
-          initialValue: initialValue,
           builder: (FormFieldState<File?> state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 OutlinedButton(
                   style: ButtonStyle(
-                    side: MaterialStatePropertyAll(
+                    side: WidgetStatePropertyAll(
                       BorderSide(
                         color:
                             state.hasError ? Colors.redAccent : Colors.black26,

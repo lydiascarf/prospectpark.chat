@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.memories_app">
+    package="com.example.prospect_park_dot_chat">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="memories_app"
+        android:label="prospect_park_dot_chat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
